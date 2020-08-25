@@ -30,7 +30,8 @@ export const theme = {
     texts: '#030517',
     white: '#FFFFFF',
     black: '#000000',
-    gray: '#7B7373'
+    gray: '#7B7373',
+    orange: '#fc2c03'
   },
   spacings: {
     xxsmall: '0.8rem',
