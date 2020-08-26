@@ -57,6 +57,6 @@ export const Disco: FC<IllustrationProps> = ({ width, height }) => (
 )
 
 Disco.defaultProps = {
-  width: '100',
-  height: '100'
+  width: '70',
+  height: '70'
 }

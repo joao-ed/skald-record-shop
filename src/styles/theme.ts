@@ -23,7 +23,7 @@ export const theme = {
   },
   colors: {
     primary: '#3D71FA',
-    primaryHover: '#5298FA',
+    primaryHover: '#DCE0E9',
     secondary: '#FBC97B',
     mainBg: '#FAFAFA',
     boxBg: '#FAFAFA',
@@ -31,6 +31,7 @@ export const theme = {
     white: '#FFFFFF',
     black: '#000000',
     gray: '#7B7373',
+    lightGray: '#F4F4F9',
     orange: '#fc2c03'
   },
   spacings: {
