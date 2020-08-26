@@ -11,7 +11,7 @@ export const Fixed = styled.div`
   z-index: 1;
   top: 50%;
   left: 50%;
-  margin-top: 100px;
+  margin-top: 80px;
   transform: translate(-50%, -50%);
 `
 

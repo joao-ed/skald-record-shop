@@ -4,12 +4,13 @@ import { If } from 'react-extras'
 import FocusLock from 'react-focus-lock'
 import KeyHandler from 'react-key-handler'
 import { useLockBodyScroll } from 'react-use'
-
-import * as S from './styles'
-import { Flex } from '../flex'
-import { Box } from 'rebass'
-import { IconButton } from '../icon-button'
 import { Close } from '@styled-icons/evaicons-solid'
+
+// Components
+import { Flex, Box, IconButton } from '~/components'
+
+// Styles
+import * as S from './styles'
 
 interface FullscreenModalProps {
   open: boolean
