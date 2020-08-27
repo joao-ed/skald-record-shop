@@ -1,9 +1,9 @@
 // packages
 import React from 'react'
+import { NextPage } from 'next'
 
 // Components
 import { Header, HeaderActions } from '~/components'
-import { NextPage } from 'next'
 
 export function withNavigation(Page: NextPage<any>) {
   function WrappedPage(props: any) {
