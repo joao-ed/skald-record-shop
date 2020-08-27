@@ -8,7 +8,7 @@ import { Box, Flex } from '~/components'
 import * as S from './styles'
 
 interface ActionItemProps {
-  icon: React.ReactNode
+  icon?: React.ReactNode
 }
 
 export const ActionItem: FC<PropsWithChildren<ActionItemProps>> = ({

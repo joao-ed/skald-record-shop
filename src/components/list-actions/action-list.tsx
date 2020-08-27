@@ -5,19 +5,19 @@ import { ActionItem } from './action-item'
 
 export interface Actions<T> {
   content: React.ReactNode
-  contentData: T
-  icon: React.ReactNode
+  contentData?: T
+  icon?: React.ReactNode
 }
 
 interface ActionsProps<T> {
   actions: Actions<T>[]
-  onClickCallback: (item: T) => void
+  onClickCallback?: (item?: T) => void
 }
 
 export function ActionList<T>({ actions, onClickCallback }: ActionsProps<T>) {
   const onClick = (key: number) => {
     const { contentData } = actions[key]
-    onClickCallback(contentData)
+    onClickCallback && onClickCallback(contentData)
   }
 
   return (

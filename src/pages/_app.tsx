@@ -6,6 +6,9 @@ import { AppProps } from 'next/app'
 // styles
 import { GlobalStyle, theme } from '../styles'
 
+// HOCs
+import { withProductProvider } from '~/hocs'
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
@@ -15,4 +18,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+export default withProductProvider(MyApp)

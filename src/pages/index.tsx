@@ -1,39 +1,25 @@
 // packages
 import React from 'react'
-import { ProductCard, Container, IconButton, Flex } from '~/components'
-import { Product } from '~/types'
-import { HeartCircle } from '@styled-icons/boxicons-regular/HeartCircle'
+import { Container } from '~/components'
+import * as R from 'ramda'
 
 // HOCs
 import { withNavigation } from '~/hocs'
-import { Button } from 'rebass'
 
-const prod: Product = {
-  id: '1',
-  title: 'Led Zeppelin IV',
-  price: 2000,
-  image: '/images/empty-bag.svg'
-}
+// Components
+import { ProductList } from '~/components'
+
+import { withProductProvider } from '~/hocs'
 
 function Home() {
   return (
     <Container>
-      <h1 style={{ color: 'black' }}>Homepage</h1>
-      <ProductCard
-        topbar={
-          <div>
-            <IconButton icon={<HeartCircle width={30} color={'red'} />} />
-          </div>
-        }
-        toolbar={
-          <Flex justifyContent="flex-end">
-            <Button backgroundColor="#3D71FA">BUY</Button>
-          </Flex>
-        }
-        product={prod}
-      />
+      <h2 style={{ color: 'black', marginBottom: '2rem' }}>
+        Our most adorable LPs waiting for you :)
+      </h2>
+      <ProductList />
     </Container>
   )
 }
 
-export default withNavigation(Home)
+export default R.compose(withProductProvider, withNavigation)(Home)

@@ -1,8 +1,8 @@
 // packages
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { ShoppingBag } from '@styled-icons/heroicons-outline'
 import { Heart, Menu } from '@styled-icons/boxicons-regular'
-import { useRouter } from 'next/dist/client/router'
+
 import { useToggle } from 'react-use'
 import { Text } from 'rebass'
 
@@ -16,11 +16,12 @@ import {
   FullscreenModal
 } from '~/components'
 
+// Business Components
+import { Wishlist } from '~/business-components'
+
 // Styles
 import * as S from './styles'
-
-// Constants
-import { WISHLIST_PATH, BAG_PATH } from '~/routes'
+import { useProductContext } from '~/hooks'
 
 const WISHLIST = 'Wishlist'
 const MY_BAG = 'My bag'
@@ -28,24 +29,26 @@ const MY_BAG = 'My bag'
 export type ActionsType = 'wishlist' | 'bag' | 'all'
 
 export const HeaderActions: FC = () => {
-  const { push } = useRouter()
+  const [action, setAction] = useState<ActionsType>()
   const [open, toggleModal] = useToggle(false)
+  const { bag, wishlist } = useProductContext()
 
   // DESKTOP
-  const callToAction = (type: ActionsType) => {
+  const callToAction = (type?: ActionsType) => {
     const actions: Record<ActionsType, () => void> = {
-      wishlist: () => push(WISHLIST_PATH),
-      bag: () => push(BAG_PATH),
-      all: () => toggleModal()
+      wishlist: () => setAction('wishlist'),
+      bag: () => setAction('bag'),
+      all: () => setAction('all')
     }
-    actions[type]()
+    toggleModal(true)
+    type && actions[type]()
   }
 
   // MOBILE
   const actions = [
     {
       icon: (
-        <Badge content={2}>
+        <Badge content={bag?.list.length}>
           <ShoppingBag width={30} color="black" />
         </Badge>
       ),
@@ -58,7 +61,7 @@ export const HeaderActions: FC = () => {
     },
     {
       icon: (
-        <Badge content={4}>
+        <Badge content={wishlist?.list.length}>
           <Heart width={30} color="black" />
         </Badge>
       ),
@@ -71,11 +74,22 @@ export const HeaderActions: FC = () => {
     }
   ]
 
+  const fullscreenContent: Record<ActionsType, React.ReactNode> = {
+    wishlist: <Wishlist />,
+    bag: <h1>heyy, this is a bag</h1>,
+    all: (
+      <ActionList<ActionsType>
+        onClickCallback={callToAction}
+        actions={actions}
+      />
+    )
+  }
+
   return (
     <Flex>
       <S.Toolbar>
         <Box px="2rem">
-          <Badge content={3}>
+          <Badge content={wishlist?.list.length}>
             <IconButton
               icon={<Heart width={30} />}
               caption={WISHLIST}
@@ -84,7 +98,7 @@ export const HeaderActions: FC = () => {
           </Badge>
         </Box>
         <Box px="4rem">
-          <Badge content={2}>
+          <Badge content={bag?.list.length}>
             <IconButton
               icon={<ShoppingBag width={30} />}
               caption={MY_BAG}
@@ -100,12 +114,7 @@ export const HeaderActions: FC = () => {
         />
       </S.Menu>
       <FullscreenModal open={open} toggleModal={toggleModal}>
-        <Box paddingTop="1rem">
-          <ActionList<ActionsType>
-            onClickCallback={callToAction}
-            actions={actions}
-          />
-        </Box>
+        <Box paddingTop="1rem">{fullscreenContent[action as ActionsType]}</Box>
       </FullscreenModal>
     </Flex>
   )
