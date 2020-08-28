@@ -32,7 +32,10 @@ export const theme = {
     black: '#000000',
     gray: '#7B7373',
     lightGray: '#F4F4F9',
-    orange: '#fc2c03'
+    orange: '#fc2c03',
+    lightRed: '#FFC9C3',
+    red: '#E74C3C',
+    lightBlue: '#6C9EF6'
   },
   spacings: {
     xxsmall: '0.8rem',

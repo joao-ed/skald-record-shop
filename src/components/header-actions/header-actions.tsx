@@ -21,6 +21,8 @@ import { Wishlist } from '~/business-components'
 
 // Styles
 import * as S from './styles'
+
+// Hooks
 import { useProductContext } from '~/hooks'
 
 const WISHLIST = 'Wishlist'
@@ -76,7 +78,7 @@ export const HeaderActions: FC = () => {
 
   const fullscreenContent: Record<ActionsType, React.ReactNode> = {
     wishlist: <Wishlist />,
-    bag: <h1>heyy, this is a bag</h1>,
+    bag: <h1>hey, this is a bag</h1>,
     all: (
       <ActionList<ActionsType>
         onClickCallback={callToAction}
