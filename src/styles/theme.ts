@@ -35,7 +35,8 @@ export const theme = {
     orange: '#fc2c03',
     lightRed: '#FFC9C3',
     red: '#E74C3C',
-    lightBlue: '#6C9EF6'
+    lightBlue: '#6C9EF6',
+    green: '#14AA4B'
   },
   spacings: {
     xxsmall: '0.8rem',

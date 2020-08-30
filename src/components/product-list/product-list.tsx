@@ -1,14 +1,16 @@
 // Packages
 import React, { FC } from 'react'
-
 import { For } from 'react-extras'
-import { ProductCard } from '../product-card'
-import { Flex } from '../flex'
-import { Button } from 'rebass'
 import { IconButton } from '../icon-button'
 import { HeartCircle } from '@styled-icons/boxicons-regular/HeartCircle'
-import { Grid } from '../grid'
+
+// Components
+import { Flex, Button, Grid, ProductCard } from '~/components'
+
+// Hooks
 import { useProductContext } from '~/hooks'
+
+const BUY = 'BUY'
 
 export const ProductList: FC = () => {
   const { products = [], bag, wishlist } = useProductContext()
@@ -30,12 +32,10 @@ export const ProductList: FC = () => {
             toolbar={
               <Flex justifyContent="flex-end">
                 <Button
-                  backgroundColor="#3D71FA"
-                  onClick={() =>
-                    bag?.actions.insertAt(0, { ...product, quantity: 1 })
-                  }
+                  variant="primary"
+                  onClick={() => bag?.actions.addToBag(product)}
                 >
-                  BUY
+                  {BUY}
                 </Button>
               </Flex>
             }

@@ -22,7 +22,7 @@ const REMOVE = 'REMOVE'
 interface EntryItemProps {
   index: number
   item: Product
-  addBagCallback: (item: Product) => void
+  addBagCallback?: (item: Product) => void
   removeWishlistCallback: (index: number) => void
 }
 
@@ -42,7 +42,7 @@ const EntryItem: FC<EntryItemProps> = ({
       <Flex padding="2rem" justifyContent="flex-end">
         <Button
           variant="primary"
-          onClick={() => addBagCallback(item)}
+          onClick={() => addBagCallback && addBagCallback(item)}
           mr="2rem"
           icon={<ShoppingBag width={20} />}
         >
@@ -64,15 +64,13 @@ const EntryItem: FC<EntryItemProps> = ({
 export const Wishlist = () => {
   const { wishlist, bag } = useProductContext()
 
-  const addToBag = (item: Product) =>
-    bag?.actions.insertAt(0, { ...item, quantity: 1 })
   const removeFromWishlist = (index: number) =>
     wishlist?.actions.removeAt(index)
 
   const listOfProducts = wishlist?.list.map((item, index) => ({
     content: (
       <EntryItem
-        addBagCallback={addToBag}
+        addBagCallback={bag?.actions.addToBag}
         removeWishlistCallback={removeFromWishlist}
         item={item}
         index={index}

@@ -17,7 +17,7 @@ import {
 } from '~/components'
 
 // Business Components
-import { Wishlist } from '~/business-components'
+import { Wishlist, Bag } from '~/business-components'
 
 // Styles
 import * as S from './styles'
@@ -78,7 +78,7 @@ export const HeaderActions: FC = () => {
 
   const fullscreenContent: Record<ActionsType, React.ReactNode> = {
     wishlist: <Wishlist />,
-    bag: <h1>hey, this is a bag</h1>,
+    bag: <Bag />,
     all: (
       <ActionList<ActionsType>
         onClickCallback={callToAction}
