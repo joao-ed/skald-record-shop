@@ -12,7 +12,7 @@ export default {
 
 const content = ['bag', 'wishlist']
 
-const onClickCallback = (item: string) => console.log(item)
+const onClickCallback = (item?: string) => console.log(item)
 
 const actions: Actions<string>[] = [
   {

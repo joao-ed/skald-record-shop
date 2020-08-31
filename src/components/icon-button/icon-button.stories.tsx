@@ -9,4 +9,6 @@ export default {
   title: 'Components/IconButton'
 }
 
-export const Empty = () => <IconButton />
+export const Empty = () => (
+  <IconButton icon={<ShoppingBag width={30} color="black" />} />
+)

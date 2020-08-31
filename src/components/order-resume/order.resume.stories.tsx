@@ -6,4 +6,4 @@ export default {
   title: 'Components/OrderResume'
 }
 
-export const Example = () => <OrderResume />
+export const Example = () => <OrderResume total={33004} />
