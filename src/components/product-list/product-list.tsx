@@ -13,12 +13,12 @@ import { useProductContext } from '~/hooks'
 const BUY = 'BUY'
 
 export const ProductList: FC = () => {
-  const { products = [], bag, wishlist } = useProductContext()
+  const { products, bag, wishlist } = useProductContext()
 
   return (
     <Grid min="30ch" gutter="1rem">
       <For
-        of={products}
+        of={products?.list || []}
         render={(product) => (
           <ProductCard
             topbar={

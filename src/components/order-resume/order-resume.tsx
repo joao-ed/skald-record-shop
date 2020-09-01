@@ -9,10 +9,16 @@ import { stringFormat } from '~/helpers'
 
 // Styles
 import * as S from './styles'
+import { If } from 'react-extras'
 
 const TAX = 1000
 
-export const OrderResume: FC<{ total: number }> = ({ total }) => {
+interface OrderResumeProps {
+  total: number
+  checkout?: () => void
+}
+
+export const OrderResume: FC<OrderResumeProps> = ({ total, checkout }) => {
   const { currency } = stringFormat
   return (
     <S.Wrapper>
@@ -33,7 +39,14 @@ export const OrderResume: FC<{ total: number }> = ({ total }) => {
           labelColor="black"
           formatter={currency}
         />
-        <Button variant="primary">Checkout</Button>
+        <If
+          condition={Boolean(checkout)}
+          render={() => (
+            <Button variant="primary" onClick={checkout}>
+              Checkout
+            </Button>
+          )}
+        />
       </Stack>
     </S.Wrapper>
   )

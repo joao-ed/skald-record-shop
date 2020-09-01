@@ -1,5 +1,5 @@
 // packages
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { ShoppingBag } from '@styled-icons/heroicons-outline'
 import { Heart, Menu } from '@styled-icons/boxicons-regular'
 
@@ -24,6 +24,7 @@ import * as S from './styles'
 
 // Hooks
 import { useProductContext } from '~/hooks'
+import { Input } from '@rebass/forms'
 
 const WISHLIST = 'Wishlist'
 const MY_BAG = 'My bag'

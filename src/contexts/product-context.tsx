@@ -1,5 +1,5 @@
 // Packages
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import Axios from 'axios'
 import { ListActions } from 'react-use/lib/useList'
 import { useList } from 'react-use'
@@ -13,7 +13,7 @@ export interface BagProps extends Product {
 }
 
 export interface ProductContextProps {
-  products?: Product[]
+  products?: { list: Product[]; actions: ListActions<Product> }
   wishlist?: { list: Product[]; actions: ListActions<Product> }
   bag?: {
     list: BagProps[]
@@ -45,7 +45,7 @@ function actionFactory<T>(
 }
 
 export const ProductContext: FC = ({ children }) => {
-  const [products, setProducts] = useState<Product[]>()
+  const [products, productsActions] = useList<Product>()
   const [wishlist, wishlistActions] = useList<Product>()
   const [bag, bagActions] = useList<BagProps>()
 
@@ -73,7 +73,7 @@ export const ProductContext: FC = ({ children }) => {
     const fetchData = async () => {
       const response = await Axios.get('http:///localhost:3000/api/products')
       if (response.status === 200 && response) {
-        setProducts(response.data)
+        productsActions.set(response.data)
       }
     }
     fetchData()
@@ -81,7 +81,10 @@ export const ProductContext: FC = ({ children }) => {
 
   const value = React.useMemo(
     () => ({
-      products,
+      products: {
+        list: products,
+        actions: productsActions
+      },
       wishlist: {
         list: wishlist,
         actions: actionFactory<Product>('wishlist', wishlistActions, wishlist)

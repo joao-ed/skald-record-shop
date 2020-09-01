@@ -1,9 +1,10 @@
 // Packages
 import React, { FC } from 'react'
-
 import { Choose } from 'react-extras'
 import { Label, Input } from '@rebass/forms'
 import { RemoveCircleOutline } from '@styled-icons/material'
+import { useToggle } from 'react-use'
+
 // Components
 import {
   ActionList,
@@ -12,8 +13,11 @@ import {
   IconButton,
   Field,
   Flex,
-  OrderResume
+  OrderResume,
+  Center
 } from '~/components'
+
+import { Checkout } from '../checkout'
 
 // Hooks
 import { useProductContext } from '~/hooks'
@@ -24,6 +28,7 @@ import { stringFormat } from '~/helpers'
 // Contexts
 import { BagProps } from '~/contexts'
 
+// Styles
 import * as S from './styles'
 
 interface EntryItemProps {
@@ -81,6 +86,7 @@ const EntryItem: FC<EntryItemProps> = ({ index, item, removeCallback }) => {
 }
 export const Bag = () => {
   const { bag } = useProductContext()
+  const [checkout, setCheckout] = useToggle(false)
 
   const removeFromBag = (index: number) => bag?.actions.removeAt(index)
 
@@ -90,13 +96,20 @@ export const Bag = () => {
     )
   }))
 
-  const orderAmount = bag?.list.reduce(
-    (prev, { price, quantity }) => prev + quantity * price,
-    0
-  )
+  const orderAmount =
+    bag?.list.reduce(
+      (prev, { price, quantity }) => prev + quantity * price,
+      0
+    ) || 0
 
   return (
     <Choose>
+      <Choose.When
+        condition={checkout}
+        render={() => (
+          <Checkout toggleCheckout={setCheckout} orderAmount={orderAmount} />
+        )}
+      />
       <Choose.When
         condition={Boolean(listOfProducts && listOfProducts?.length > 0)}
         render={() =>
@@ -106,13 +119,19 @@ export const Bag = () => {
                 <ActionList<BagProps> actions={listOfProducts} />
               </Box>
               <Box minWidth="30%">
-                <OrderResume total={orderAmount || 0} />
+                <OrderResume total={orderAmount || 0} checkout={setCheckout} />
               </Box>
             </Flex>
           )
         }
       />
-      <Choose.Otherwise render={() => <h1>Your bag is empty :(</h1>} />
+      <Choose.Otherwise
+        render={() => (
+          <Center>
+            <h2>Your bag is empty :(</h2>
+          </Center>
+        )}
+      />
     </Choose>
   )
 }
