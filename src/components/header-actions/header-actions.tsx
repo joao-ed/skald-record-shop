@@ -78,7 +78,7 @@ export const HeaderActions: FC = () => {
 
   const fullscreenContent: Record<ActionsType, React.ReactNode> = {
     wishlist: <Wishlist />,
-    bag: <Bag />,
+    bag: <Bag toggleModal={toggleModal} />,
     all: (
       <ActionList<ActionsType>
         onClickCallback={callToAction}

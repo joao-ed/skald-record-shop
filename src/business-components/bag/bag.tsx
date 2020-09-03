@@ -4,6 +4,7 @@ import { Choose } from 'react-extras'
 import { Label, Input } from '@rebass/forms'
 import { RemoveCircleOutline } from '@styled-icons/material'
 import { useToggle } from 'react-use'
+import { StateMachineProvider } from 'little-state-machine'
 
 // Components
 import {
@@ -84,7 +85,7 @@ const EntryItem: FC<EntryItemProps> = ({ index, item, removeCallback }) => {
     </S.Wrapper>
   )
 }
-export const Bag = () => {
+export const Bag: FC<{ toggleModal: () => void }> = ({ toggleModal }) => {
   const { bag } = useProductContext()
   const [checkout, setCheckout] = useToggle(false)
 
@@ -107,9 +108,16 @@ export const Bag = () => {
       <Choose.When
         condition={checkout}
         render={() => (
-          <Checkout toggleCheckout={setCheckout} orderAmount={orderAmount} />
+          <StateMachineProvider>
+            <Checkout
+              toggleCheckout={setCheckout}
+              orderAmount={orderAmount}
+              toggleFullScreen={toggleModal}
+            />
+          </StateMachineProvider>
         )}
       />
+
       <Choose.When
         condition={Boolean(listOfProducts && listOfProducts?.length > 0)}
         render={() =>
