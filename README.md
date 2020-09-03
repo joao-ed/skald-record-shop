@@ -2,6 +2,9 @@
 
 SRS (Skald record shop) is the virtual store for the most famous record store in the world. This application was build essentially with [NextJS](https://nextjs.org/), [ReactJS](https://reactjs.org/), [Typescript](https://www.typescriptlang.org/). :fire:
 
+See live preview [here](https://skald-record-shop.vercel.app/)
+
+
 ## Installation
 
 ```bash
