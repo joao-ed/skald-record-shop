@@ -71,7 +71,7 @@ export const ProductContext: FC = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await Axios.get('http:///localhost:3000/api/products')
+      const response = await Axios.get('/api/products')
       if (response.status === 200 && response) {
         productsActions.set(response.data)
       }
