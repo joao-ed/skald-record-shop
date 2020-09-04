@@ -9,7 +9,7 @@ export const ItemWrapper = styled(Card)`
   box-shadow: 7px 11px 34px -16px rgba(0, 0, 0, 0.56);
   &:hover,
   &:focus {
-    background-color: ${theme('colors.primaryHover')};
+    background-color: ${theme('colors.lightGray')};
     cursor: pointer;
   }
 `

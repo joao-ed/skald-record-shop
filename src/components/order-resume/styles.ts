@@ -8,9 +8,4 @@ export const Wrapper = styled(Card)`
   -moz-box-shadow: 7px 11px 34px -16px rgba(0, 0, 0, 0.56);
   box-shadow: 7px 11px 34px -16px rgba(0, 0, 0, 0.56);
   padding: ${theme('spacings.small')};
-  &:hover,
-  &:focus {
-    background-color: ${theme('colors.primaryHover')};
-    cursor: pointer;
-  }
 `
