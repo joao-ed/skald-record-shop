@@ -21,6 +21,7 @@ export const ProductList: FC = () => {
         of={products?.list || []}
         render={(product) => (
           <ProductCard
+            key={product.id}
             topbar={
               <div>
                 <IconButton

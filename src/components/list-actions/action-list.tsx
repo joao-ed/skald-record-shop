@@ -24,7 +24,11 @@ export function ActionList<T>({ actions, onClickCallback }: ActionsProps<T>) {
     <For
       of={actions}
       render={(item, index) => (
-        <div onClick={() => onClick(index)} style={{ padding: '1rem' }}>
+        <div
+          key={index}
+          onClick={() => onClick(index)}
+          style={{ padding: '1rem' }}
+        >
           <ActionItem {...item}>{item.content}</ActionItem>
         </div>
       )}

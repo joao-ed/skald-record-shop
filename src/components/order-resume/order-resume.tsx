@@ -1,5 +1,6 @@
 // Packages
 import React, { FC } from 'react'
+import { If } from 'react-extras'
 
 // Components
 import { Field, Button, Stack } from '~/components'
@@ -9,7 +10,6 @@ import { stringFormat } from '~/helpers'
 
 // Styles
 import * as S from './styles'
-import { If } from 'react-extras'
 
 const TAX = 1000
 

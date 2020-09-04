@@ -43,6 +43,7 @@ export default class NextDocument extends Document {
             rel="preload"
             href="/fonts/poppins-v9-latin-regular.woff2"
             as="font"
+            crossOrigin=""
           />
         </Head>
         <body>
