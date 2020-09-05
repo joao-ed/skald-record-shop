@@ -11,7 +11,7 @@ import { updateAction } from '../state'
 import { Grid } from '~/components'
 
 // Types
-import { CheckoutFormProps, UiContentEnum } from '../types'
+import { CheckoutFormProps, UiContentEnum, StoreProps } from '../types'
 
 // Toolbar
 import { Toolbar } from './toolbar'
@@ -27,7 +27,7 @@ type PaymentInfoForm = Pick<
 
 export const PaymentInfo: FC<PaymentInfoProps> = ({ onSuccess }) => {
   const { register, handleSubmit, getValues } = useForm<PaymentInfoForm>()
-  const { state, action } = useStateMachine(updateAction)
+  const { state, action } = useStateMachine<StoreProps>(updateAction)
 
   const onSubmit = (data: PaymentInfoForm) => {
     try {

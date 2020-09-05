@@ -1,5 +1,5 @@
 // Packages
-import React, { FC, useCallback } from 'react'
+import React, { FC } from 'react'
 import * as R from 'ramda'
 import { createStore, useStateMachine } from 'little-state-machine'
 
@@ -47,7 +47,7 @@ export const Checkout: FC<CheckoutProps> = ({
   toggleCheckout,
   toggleFullScreen
 }) => {
-  const { state, actions } = useStateMachine({
+  const { state, actions } = useStateMachine<StoreProps>({
     reset,
     updateAction
   })
@@ -56,28 +56,22 @@ export const Checkout: FC<CheckoutProps> = ({
 
   const { bag } = useProductContext()
 
-  const onSuccess = useCallback(
-    () =>
-      R.compose(
-        () => toggleFullScreen(),
-        () => bag?.actions.clear(),
-        () => actions.reset({})
-      )(),
-    [toggleFullScreen, bag, actions]
-  )
+  const onSuccess = () =>
+    R.compose(
+      () => toggleFullScreen(),
+      () => bag?.actions.clear(),
+      () => actions.reset({})
+    )()
 
-  const uiContent = useCallback(
-    (): Record<UiContentEnum, React.ReactNode> => ({
-      0: <PersonalInfo toggleCheckout={toggleCheckout} />,
-      1: <AddressInfo />,
-      2: <PaymentInfo onSuccess={onSuccess} />
-    }),
-    [onSuccess, toggleCheckout]
-  )()
+  const uiContent: Record<UiContentEnum, React.ReactNode> = {
+    0: <PersonalInfo toggleCheckout={toggleCheckout} />,
+    1: <AddressInfo />,
+    2: <PaymentInfo onSuccess={onSuccess} />
+  }
 
   return (
     <Grid min="30ch" gutter="4rem">
-      <Stack space="4rem">{uiContent[(section as UiContentEnum) || 0]}</Stack>
+      <Stack space="4rem">{uiContent[section]}</Stack>
       <OrderResume total={orderAmount} />
     </Grid>
   )
